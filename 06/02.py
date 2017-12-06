@@ -3,7 +3,6 @@ dublicate = False
 output = 0
 tmp_arr = []
 while not dublicate:
-    output += 1
     number = max(arr)
     index = arr.index(number)
     arr[index] = 0
@@ -13,5 +12,6 @@ while not dublicate:
         tmp_arr.append([x for x in arr])
     else:
         dublicate = True
+        output = abs(tmp_arr.index(arr) - len(tmp_arr))
 
 print(output)
