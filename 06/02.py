@@ -13,5 +13,4 @@ while not dublicate:
     else:
         dublicate = True
         output = abs(tmp_arr.index(arr) - len(tmp_arr))
-
 print(output)
