@@ -2,8 +2,28 @@ def find_parent(tree, parent):
     for key, value in tree.items():
         if parent in value:
             return find_parent(tree, key)
-
     return parent
+
+
+def make_sum(tree, nodes, parent):
+    tmp_arr = []
+    for i in range(len(tree[parent])):
+        if tree.get(tree[parent][i]) is not None:
+            tmp_arr.append(make_sum(tree, nodes, tree[parent][i]) + nodes[tree[parent][i]])
+        else:
+            tmp_arr.append(nodes[tree[parent][i]])
+    if len(list(set(tmp_arr))) == 1:
+        return sum(tmp_arr)
+    else:
+        for j in range(len(tmp_arr)):
+            if tmp_arr.count(tmp_arr[j]) == 1:
+                if tmp_arr[j] > min(tmp_arr):
+                    print(nodes[tree[parent][j]] - abs(max(tmp_arr) - min(tmp_arr)))
+                    exit()
+
+                print(nodes[tree[parent][j]] + abs(max(tmp_arr) - min(tmp_arr)))
+                exit()
+
 
 line = input()
 arr = []
@@ -23,7 +43,4 @@ for i in range(len(arr)):
             parent = key
         tree[key] = values
 print(nodes)
-print(tree)
-print(find_parent(tree, parent))
-
-
+make_sum(tree, nodes, find_parent(tree, parent))
